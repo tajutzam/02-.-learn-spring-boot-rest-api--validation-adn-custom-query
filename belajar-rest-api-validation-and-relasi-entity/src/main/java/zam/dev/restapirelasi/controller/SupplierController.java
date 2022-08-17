@@ -6,13 +6,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
-import zam.dev.restapirelasi.dto.RespondBody;
-import zam.dev.restapirelasi.dto.SupplierDto;
-import zam.dev.restapirelasi.dto.UpdateSupplierDto;
+import zam.dev.restapirelasi.dto.*;
 import zam.dev.restapirelasi.model.entity.Supplier;
 import zam.dev.restapirelasi.service.SupplierService;
 
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -87,5 +86,20 @@ public class SupplierController {
            throw new RuntimeException("Data Not Found");
        }
        supplierService.delete(supplier);
+    }
+
+    @PostMapping("/search/byemail")
+    public Supplier findByEmail(@RequestBody SearchDto email){
+        return supplierService.findByEmail(email.getKeyword());
+    }
+
+    @PostMapping("/search/name/contains")
+    public List<Supplier> findByNameContaining(@RequestBody SearchDto searchDto){
+        return supplierService.findByNameLike(searchDto.getKeyword());
+    }
+
+    @PostMapping("/search/nameoremail")
+    public Supplier findByNameOrEmail(@RequestBody SearchTwoKeywordDto searchTwoKeywordDto){
+        return supplierService.findByNameOrEmail(searchTwoKeywordDto.getKeywordOne(), searchTwoKeywordDto.getKeywordTwo());
     }
 }

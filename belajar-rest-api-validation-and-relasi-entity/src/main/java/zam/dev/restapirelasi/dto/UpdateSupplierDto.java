@@ -11,7 +11,7 @@ public class UpdateSupplierDto {
     private Long id;
 
     @NotEmpty(message = "name is required")
-    private String nama_supplier;
+    private String name;
 
     @NotEmpty(message = "Addres is required")
     private String address;

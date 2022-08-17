@@ -26,7 +26,7 @@ public class Supplier implements Serializable {
     private Long id;
 
     @Column( length = 64)
-    private String nama_supplier;
+    private String name;
 
     @Column()
     private String address;

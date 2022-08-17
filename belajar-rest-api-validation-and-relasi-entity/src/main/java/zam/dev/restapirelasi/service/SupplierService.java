@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import zam.dev.restapirelasi.model.entity.Supplier;
 import zam.dev.restapirelasi.model.repository.SupplierRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -36,4 +37,17 @@ public class SupplierService {
     public void delete(Supplier supplier){
         supplierRepository.delete(supplier);
     }
+
+    public Supplier findByEmail(String email){
+        return supplierRepository.findByEmail(email);
+    }
+
+    public List<Supplier> findByNameLike(String name){
+        return supplierRepository.findByNameLike("%" + name + "%");
+    }
+
+    public Supplier findByNameOrEmail(String name , String email){
+        return supplierRepository.findByNameOrEmail(name , email);
+    }
+
 }
